@@ -80,8 +80,8 @@ choisir les catégories de données interrogées et l'intervalle de chacune.
 
 | Entité | Type | Notes |
 |---|---|---|
-| Débit descendant / montant | `sensor` | affiché en Mbit/s, valeur native en octets/s |
-| Bande passante descendante / montante | `sensor` | affiché en Mbit/s, valeur native en bits/s, diagnostic |
+| Débit descendant / montant | `sensor` | affiché en MB/s, valeur native en octets/s |
+| Bande passante descendante / montante | `sensor` | affiché en MB/s, valeur native en bits/s, diagnostic |
 | Données reçues / envoyées | `sensor` | compteurs cumulés, statistiques long terme |
 | Adresse IPv4 / IPv6 | `sensor` | IPv6 désactivée par défaut |
 | Puissance optique reçue / émise | `sensor` | dBm, diagnostic |
@@ -119,11 +119,11 @@ expurgés).
 
 ### Changer l'unité d'affichage des débits
 
-L'unité suggérée (Mbit/s) n'est appliquée qu'à la **première** création des
+L'unité suggérée (MB/s) n'est appliquée qu'à la **première** création des
 entités : Home Assistant mémorise ensuite le choix dans le registre. Sur une
 installation antérieure, deux options :
 
-- par entité : ouvrir l'entité → ⚙️ → **Unité de mesure** → `Mbit/s` ;
+- par entité : ouvrir l'entité → ⚙️ → **Unité de mesure** → `MB/s` ;
 - d'un coup : supprimer l'entrée d'intégration et la reconfigurer (l'appairage
   est à refaire, mais les entités reprennent les unités suggérées).
 

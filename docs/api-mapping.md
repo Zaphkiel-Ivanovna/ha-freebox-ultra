@@ -18,7 +18,7 @@ soit typiquement `https://abcdefgh.fbxos.fr:43210/api/v12/`.
 
 | Endpoint | Champs | Entité HA | Notes |
 |---|---|---|---|
-| `GET /connection/` | `rate_down`, `rate_up` | `sensor` · `device_class: data_rate` · `MEASUREMENT` | ⚠️ En **octets/s** (`byte/s` dans la doc). Unité native conservée, affichage suggéré en Mbit/s. |
+| `GET /connection/` | `rate_down`, `rate_up` | `sensor` · `device_class: data_rate` · `MEASUREMENT` | ⚠️ En **octets/s** (`byte/s` dans la doc). Unité native conservée, affichage suggéré en MB/s. |
 | | `bandwidth_down`, `bandwidth_up` | `sensor` diagnostic | ⚠️ En **bits/s**, contrairement à `rate_*` : la doc dit bien « available download bandwidth in bit/s ». Une Ultra renvoie `8000000000`, soit 8 Gbit/s — lu en octets/s cela annoncerait 64 Gbit/s. Débit de synchronisation négocié, quasi statique. |
 | | `bytes_down`, `bytes_up` | `sensor` · `data_size` · `TOTAL_INCREASING` | Remis à zéro à chaque reconnexion → `TOTAL_INCREASING` absorbe le reset. |
 | | `state` (`up`/`down`) | `binary_sensor` · `connectivity` | |

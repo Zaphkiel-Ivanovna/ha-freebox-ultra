@@ -71,8 +71,8 @@ async def test_values_are_read_from_payloads(
         assert state is not None, entity_id
         return state.state
 
-    assert state_of(f"{serial}_rate_down") == "7.84"
-    assert state_of(f"{serial}_bandwidth_down") == "8000.0"
+    assert state_of(f"{serial}_rate_down") == "0.98"
+    assert state_of(f"{serial}_bandwidth_down") == "1000.0"
     assert state_of(f"{serial}_wan_state") == "on"
     assert state_of(f"{serial}_sensors_temp_cpum") == "52"
     assert state_of(f"{serial}_fans_fan0_speed") == "1800"
