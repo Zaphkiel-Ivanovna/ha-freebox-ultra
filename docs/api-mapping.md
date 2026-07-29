@@ -14,6 +14,48 @@ soit typiquement `https://abcdefgh.fbxos.fr:43210/api/v12/`.
 
 ---
 
+## 0. Pièges d'unités
+
+L'API n'est pas homogène. Chaque champ ci-dessous a été relu dans le SDK, la
+citation est celle de la doc. **Vérifier cette table avant de déclarer un
+`native_unit_of_measurement`.**
+
+| Champ | Unité réelle | Citation du SDK |
+|---|---|---|
+| `connection.rate_down` / `rate_up` | **octets/s** | « current download rate in byte/s » |
+| `connection.bandwidth_down` / `bandwidth_up` | **bits/s** ⚠️ | « available download bandwidth in bit/s » |
+| `connection.bytes_down` / `bytes_up` | octets | « total downloaded bytes since last connection » |
+| `connection.ftth.sfp_pwr_rx` / `sfp_pwr_tx` | **centièmes de dBm** ⚠️ | « scaled by 100 (in dBm) » |
+| `connection.xdsl.snr` vs `snr_10` | dB vs **dixièmes** de dB | le suffixe `_10` marque explicitement les dixièmes |
+| `wifi.station.tx_rate` / `rx_rate` | octets/s | « transmission data rate (in bytes/s) » |
+| `wifi.station.signal` | **dB, pas dBm** ⚠️ | « signal attenuation (in dB) » |
+| `wifi.station.conn_duration` / `inactive` | secondes | « (in seconds) » |
+| `downloads.stats.rx_rate` / `tx_rate` | octets/s | « current receive rate in bytes / second » |
+| `download.size`, `rx_bytes`, `tx_bytes` | octets | « download size (in Bytes) » |
+| `download.eta` | secondes | « estimated remaining download time (in seconds) » |
+| `storage.*_bytes` | octets | — |
+| `storage.disk.temp` | °C | — |
+| `system.uptime_val` | secondes | « duration in seconds » |
+| `system.sensors[].value` | °C | non documenté, confirmé sur une Ultra (« Disque dur », 62 °C) |
+| `system.fans[].value` | tr/min | non documenté |
+| `call.duration` | secondes | « call duration in seconds » |
+
+Deux règles qui en découlent :
+
+1. **`bandwidth_*` est le seul champ de débit en bits/s de toute l'API.** Tous
+   les autres débits sont en octets/s. Une Ultra renvoie `bandwidth_down` à
+   `8000000000`, soit 8 Gbit/s — lu en octets/s cela annoncerait 64 Gbit/s.
+2. Les valeurs mises à l'échelle le signalent, soit par le texte (`scaled by
+   100`), soit par un suffixe (`snr_10`). Un champ sans suffixe ni mention n'est
+   pas mis à l'échelle — sauf `sfp_pwr_*`, dont seule la prose le dit.
+
+Côté Home Assistant, l'unité native reste celle de l'API (fidélité brute,
+statistiques long terme stables) et `suggested_unit_of_measurement` porte
+l'affichage. Attention : HA **fige** l'unité d'affichage à la création de
+l'entité, la changer plus tard n'a aucun effet sur les installations existantes.
+
+---
+
 ## 1. Connexion / WAN — `Category.CONNECTION`, 15 s
 
 | Endpoint | Champs | Entité HA | Notes |
@@ -75,7 +117,7 @@ soit typiquement `https://abcdefgh.fbxos.fr:43210/api/v12/`.
 | | `config.band` | nom de l'entité | Le SDK documente `2d4g`/`5g`/`60g`. **L'Ultra étant Wi-Fi 7, une bande 6 GHz est attendue : valeur à relever sur le boîtier.** |
 | | `config.primary_channel`, `channel_width` | `sensor` diagnostic | |
 | `GET /wifi/ap/{id}/stations/` | nombre d'entrées | `sensor` « clients Wi-Fi » par radio | |
-| | `signal`, `tx_rate`, `rx_rate`, `host` | attributs, ou `sensor` RSSI par appareil | Une entité RSSI par client = beaucoup d'entités : à réserver à une option. |
+| | `signal`, `tx_rate`, `rx_rate`, `host` | attributs, ou `sensor` RSSI par appareil | Une entité RSSI par client = beaucoup d'entités : à réserver à une option. ⚠️ La doc décrit `signal` comme une **atténuation en dB**, pas un RSSI en dBm : ne pas coller `device_class: signal_strength` sans avoir relevé le signe des valeurs réelles. `tx_rate`/`rx_rate` sont en octets/s. |
 | `GET /wifi/ap/{id}/neighbors/` | SSID, canal, signal | — | Diagnostic ponctuel, pas d'entité. |
 | `GET /wifi/planning/` | `use_planning`, `mapping[]` | `switch` (phase 4) | |
 | `GET /wifi/bss/` | SSID par bande | attributs | Redacter le SSID dans les diagnostics. |
