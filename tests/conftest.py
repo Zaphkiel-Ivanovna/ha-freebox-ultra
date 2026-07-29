@@ -48,7 +48,7 @@ CONNECTION_PAYLOAD = {
     "rate_up": 125000,
     "rate_down": 980000,
     "bandwidth_up": 700000000,
-    "bandwidth_down": 1000000000,
+    "bandwidth_down": 8000000000,
     "bytes_up": 123456789,
     "bytes_down": 987654321,
 }

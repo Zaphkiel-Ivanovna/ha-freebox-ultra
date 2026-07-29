@@ -1,4 +1,10 @@
-"""Sensor platform for the Freebox Ultra integration (MVP: network + system)."""
+"""Sensor platform for the Freebox Ultra integration (MVP: network + system).
+
+Beware of the unit asymmetry in `/connection/`: `rate_down` and `rate_up` are
+in byte/s while `bandwidth_down` and `bandwidth_up` are in bit/s. Do not
+"unify" those native units — an 8 Gbit/s Ultra reports `bandwidth_down` as
+8000000000, which read as byte/s would claim 64 Gbit/s.
+"""
 
 from __future__ import annotations
 
@@ -65,8 +71,9 @@ CONNECTION_SENSORS: tuple[FreeboxSensorDescription, ...] = (
         category=Category.CONNECTION,
         device_class=SensorDeviceClass.DATA_RATE,
         native_unit_of_measurement=UnitOfDataRate.BYTES_PER_SECOND,
+        suggested_unit_of_measurement=UnitOfDataRate.MEGABITS_PER_SECOND,
         state_class=SensorStateClass.MEASUREMENT,
-        suggested_display_precision=0,
+        suggested_display_precision=1,
         value_fn=_connection("rate_down"),
     ),
     FreeboxSensorDescription(
@@ -75,8 +82,9 @@ CONNECTION_SENSORS: tuple[FreeboxSensorDescription, ...] = (
         category=Category.CONNECTION,
         device_class=SensorDeviceClass.DATA_RATE,
         native_unit_of_measurement=UnitOfDataRate.BYTES_PER_SECOND,
+        suggested_unit_of_measurement=UnitOfDataRate.MEGABITS_PER_SECOND,
         state_class=SensorStateClass.MEASUREMENT,
-        suggested_display_precision=0,
+        suggested_display_precision=1,
         value_fn=_connection("rate_up"),
     ),
     FreeboxSensorDescription(
@@ -84,8 +92,10 @@ CONNECTION_SENSORS: tuple[FreeboxSensorDescription, ...] = (
         translation_key="bandwidth_down",
         category=Category.CONNECTION,
         device_class=SensorDeviceClass.DATA_RATE,
-        native_unit_of_measurement=UnitOfDataRate.BYTES_PER_SECOND,
+        native_unit_of_measurement=UnitOfDataRate.BITS_PER_SECOND,
+        suggested_unit_of_measurement=UnitOfDataRate.MEGABITS_PER_SECOND,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
         entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=_connection("bandwidth_down"),
     ),
@@ -94,8 +104,10 @@ CONNECTION_SENSORS: tuple[FreeboxSensorDescription, ...] = (
         translation_key="bandwidth_up",
         category=Category.CONNECTION,
         device_class=SensorDeviceClass.DATA_RATE,
-        native_unit_of_measurement=UnitOfDataRate.BYTES_PER_SECOND,
+        native_unit_of_measurement=UnitOfDataRate.BITS_PER_SECOND,
+        suggested_unit_of_measurement=UnitOfDataRate.MEGABITS_PER_SECOND,
         state_class=SensorStateClass.MEASUREMENT,
+        suggested_display_precision=0,
         entity_category=EntityCategory.DIAGNOSTIC,
         value_fn=_connection("bandwidth_up"),
     ),
