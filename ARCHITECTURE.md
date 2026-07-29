@@ -336,15 +336,15 @@ Fait :
 - [x] Aucune I/O bloquante dans la boucle (contexte SSL en executor)
 - [x] `entry.runtime_data` typé, pas de `hass.data[DOMAIN]`
 - [x] CI : hassfest + action HACS + ruff + pytest
+- [x] Assets de marque dans `custom_components/freebox_ultra/brand/`
+      (`icon.png` 256², `icon@2x.png` 512², `logo.png` et `logo@2x.png`),
+      dérivés de `assets/logo.svg`. C'est `icon.png` que le check `brands` de
+      l'action HACS cherche ; sa présence évite le repli sur le dépôt
+      [`home-assistant/brands`](https://github.com/home-assistant/brands), où
+      une soumission reste souhaitable pour l'affichage côté cœur de HA.
 
 À faire aux phases suivantes :
 
-- [ ] Assets de marque : le check `brands` de l'action HACS est explicitement
-      ignoré (`ignore: brands` dans le workflow). Le lever proprement suppose de
-      soumettre une icône à [`home-assistant/brands`](https://github.com/home-assistant/brands)
-      sous `custom_integrations/freebox_ultra/`, ce qui demande un visuel dont on
-      a le droit d'usage — le logo Freebox est une marque d'Iliad. À traiter
-      avant toute soumission au dépôt HACS par défaut.
 - [ ] `icons.json` (icônes par `translation_key` plutôt que `_attr_icon`)
 - [ ] `services.yaml` + `strings.json` pour les services (WoL, reboot, appairage
       Freebox Home)

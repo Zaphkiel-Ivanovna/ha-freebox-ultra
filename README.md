@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/logo.svg" alt="Freebox Ultra pour Home Assistant" width="440">
+</p>
+
 # Freebox Ultra pour Home Assistant
 
 [![HACS : dépôt personnalisé](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://hacs.xyz)
@@ -76,8 +80,8 @@ choisir les catégories de données interrogées et l'intervalle de chacune.
 
 | Entité | Type | Notes |
 |---|---|---|
-| Débit descendant / montant | `sensor` | octets/s, convertible en Mbit/s dans l'UI |
-| Bande passante descendante / montante | `sensor` | diagnostic |
+| Débit descendant / montant | `sensor` | affiché en Mbit/s, valeur native en octets/s |
+| Bande passante descendante / montante | `sensor` | affiché en Mbit/s, valeur native en bits/s, diagnostic |
 | Données reçues / envoyées | `sensor` | compteurs cumulés, statistiques long terme |
 | Adresse IPv4 / IPv6 | `sensor` | IPv6 désactivée par défaut |
 | Puissance optique reçue / émise | `sensor` | dBm, diagnostic |
@@ -111,6 +115,17 @@ expurgés).
 | Une catégorie reste indisponible | Permission non accordée dans Freebox OS |
 | Demande de réauthentification | Autorisation révoquée sur le boîtier |
 | Aucun appareil connecté | Freebox en mode bridge (l'API répond `nodev`) |
+| Les débits s'affichent encore en `B/s` | Home Assistant fige l'unité d'affichage à la création de l'entité. Voir ci-dessous. |
+
+### Changer l'unité d'affichage des débits
+
+L'unité suggérée (Mbit/s) n'est appliquée qu'à la **première** création des
+entités : Home Assistant mémorise ensuite le choix dans le registre. Sur une
+installation antérieure, deux options :
+
+- par entité : ouvrir l'entité → ⚙️ → **Unité de mesure** → `Mbit/s` ;
+- d'un coup : supprimer l'entrée d'intégration et la reconfigurer (l'appairage
+  est à refaire, mais les entités reprennent les unités suggérées).
 
 ## Références
 
