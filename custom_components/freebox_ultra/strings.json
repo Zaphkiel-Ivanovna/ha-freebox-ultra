@@ -1,0 +1,131 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Connect to your Freebox",
+        "description": "Leave the defaults if your Freebox is reachable at its usual address. The port is the HTTPS port advertised by the box.",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        },
+        "data_description": {
+          "host": "Use the name advertised by the box (for example `xxxxxxxx.fbxos.fr` or `mafreebox.freebox.fr`), not an IP address: the certificate would not match.",
+          "port": "HTTPS port, usually 443."
+        }
+      },
+      "link": {
+        "title": "Authorize Home Assistant",
+        "description": "Go to your {name} and get ready to press the right arrow, then **✓**, on its screen.\n\nWhen you submit this form, the box will display an authorization request for Home Assistant. You have about three minutes to accept it."
+      },
+      "reauth_confirm": {
+        "title": "Re-authorize Home Assistant",
+        "description": "The authorization stored for {name} is no longer valid. Get ready to accept a new request on the box's screen, then submit."
+      },
+      "reconfigure": {
+        "title": "Change the Freebox address",
+        "data": {
+          "host": "Host",
+          "port": "Port"
+        }
+      }
+    },
+    "progress": {
+      "wait_for_validation": "Accept the authorization request on the screen of your {name}: press the right arrow then **✓**."
+    },
+    "error": {
+      "cannot_connect": "Cannot reach the Freebox. Check the address and port, and that you are on the local network.",
+      "invalid_auth": "The Freebox rejected the authorization request.",
+      "authorization_denied": "The request was refused or timed out on the box. Try again and accept it on the screen.",
+      "unknown": "Unexpected error. Check the Home Assistant log."
+    },
+    "abort": {
+      "already_configured": "This Freebox is already configured.",
+      "unsupported_api_version": "This Freebox exposes an API version that is too old for this integration.",
+      "invalid_discovery_info": "The discovery record is unusable.",
+      "https_not_available": "HTTPS is not enabled on this Freebox; the API cannot be used securely.",
+      "wrong_box": "That address belongs to a different Freebox.",
+      "reauth_successful": "Re-authorization succeeded.",
+      "reconfigure_successful": "Configuration updated."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Data categories",
+        "description": "Pick what to poll. Optional categories need their permission enabled by hand in Freebox OS: Settings > Access management > Applications.",
+        "data": {
+          "categories": "Enabled categories",
+          "track_new_devices": "Track newly seen devices",
+          "consider_home": "Consider a device home for"
+        },
+        "data_description": {
+          "consider_home": "Seconds during which a device that stopped answering is still reported as home."
+        }
+      },
+      "intervals": {
+        "title": "Refresh intervals",
+        "description": "Seconds between two polls. Lower values mean more load on the box.",
+        "data": {
+          "connection": "Connection",
+          "system": "System",
+          "lan": "Connected devices",
+          "wifi": "Wi-Fi",
+          "storage": "Storage",
+          "home": "Freebox Home",
+          "phone": "Telephony",
+          "calls": "Call log",
+          "vpn": "VPN",
+          "player": "Player",
+          "downloads": "Downloads",
+          "profiles": "Parental control"
+        }
+      }
+    }
+  },
+  "selector": {
+    "category": {
+      "options": {
+        "connection": "Connection (bandwidth, WAN, fiber)",
+        "system": "System (temperatures, fans, uptime)",
+        "lan": "Connected devices",
+        "wifi": "Wi-Fi (radios, clients)",
+        "storage": "Storage (disks, partitions)",
+        "home": "Freebox Home (alarm, sensors, shutters)",
+        "phone": "Telephony (line, DECT)",
+        "calls": "Call log",
+        "vpn": "VPN server",
+        "player": "Player / Devialet",
+        "downloads": "Download manager",
+        "profiles": "Parental control"
+      }
+    }
+  },
+  "issues": {
+    "missing_permission": {
+      "title": "Missing Freebox permission",
+      "description": "The `{category}` category needs the `{permission}` permission, which is not granted to Home Assistant.\n\nOpen Freebox OS > Settings > Access management > Applications, edit **Home Assistant (Freebox Ultra)**, enable the permission, then reload the integration."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "rate_down": { "name": "Download speed" },
+      "rate_up": { "name": "Upload speed" },
+      "bandwidth_down": { "name": "Download bandwidth" },
+      "bandwidth_up": { "name": "Upload bandwidth" },
+      "bytes_down": { "name": "Downloaded" },
+      "bytes_up": { "name": "Uploaded" },
+      "ipv4": { "name": "IPv4 address" },
+      "ipv6": { "name": "IPv6 address" },
+      "sfp_pwr_rx": { "name": "Optical power received" },
+      "sfp_pwr_tx": { "name": "Optical power sent" },
+      "last_boot": { "name": "Last boot" }
+    },
+    "binary_sensor": {
+      "wan_state": { "name": "Internet connection" },
+      "sfp_present": { "name": "SFP module" },
+      "sfp_has_signal": { "name": "Optical signal" },
+      "ftth_link": { "name": "Fiber link" }
+    }
+  }
+}

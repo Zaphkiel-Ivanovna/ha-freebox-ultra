@@ -1,0 +1,15 @@
+{
+  "domain": "freebox_ultra",
+  "name": "Freebox Ultra",
+  "version": "0.1.0",
+  "codeowners": ["@Zaphkiel-Ivanovna"],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/Zaphkiel-Ivanovna/ha-freebox-ultra",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/Zaphkiel-Ivanovna/ha-freebox-ultra/issues",
+  "loggers": ["custom_components.freebox_ultra"],
+  "requirements": [],
+  "zeroconf": ["_fbx-api._tcp.local."]
+}
