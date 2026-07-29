@@ -1,7 +1,6 @@
 {
   "domain": "freebox_ultra",
   "name": "Freebox Ultra",
-  "version": "0.1.0",
   "codeowners": ["@Zaphkiel-Ivanovna"],
   "config_flow": true,
   "dependencies": [],
@@ -11,5 +10,6 @@
   "issue_tracker": "https://github.com/Zaphkiel-Ivanovna/ha-freebox-ultra/issues",
   "loggers": ["custom_components.freebox_ultra"],
   "requirements": [],
+  "version": "0.1.0",
   "zeroconf": ["_fbx-api._tcp.local."]
 }

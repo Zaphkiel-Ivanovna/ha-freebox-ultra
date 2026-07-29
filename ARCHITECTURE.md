@@ -339,6 +339,12 @@ Fait :
 
 À faire aux phases suivantes :
 
+- [ ] Assets de marque : le check `brands` de l'action HACS est explicitement
+      ignoré (`ignore: brands` dans le workflow). Le lever proprement suppose de
+      soumettre une icône à [`home-assistant/brands`](https://github.com/home-assistant/brands)
+      sous `custom_integrations/freebox_ultra/`, ce qui demande un visuel dont on
+      a le droit d'usage — le logo Freebox est une marque d'Iliad. À traiter
+      avant toute soumission au dépôt HACS par défaut.
 - [ ] `icons.json` (icônes par `translation_key` plutôt que `_attr_icon`)
 - [ ] `services.yaml` + `strings.json` pour les services (WoL, reboot, appairage
       Freebox Home)
