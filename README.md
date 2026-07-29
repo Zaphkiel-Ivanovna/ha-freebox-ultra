@@ -1,5 +1,9 @@
 # Freebox Ultra pour Home Assistant
 
+[![HACS : dépôt personnalisé](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://hacs.xyz)
+[![Validate](https://img.shields.io/github/actions/workflow/status/Zaphkiel-Ivanovna/ha-freebox-ultra/validate.yml?branch=main&style=for-the-badge&label=validate)](https://github.com/Zaphkiel-Ivanovna/ha-freebox-ultra/actions/workflows/validate.yml)
+[![Licence](https://img.shields.io/github/license/Zaphkiel-Ivanovna/ha-freebox-ultra?style=for-the-badge)](LICENSE)
+
 Intégration custom exposant les données de la **Freebox Ultra (v9)** dans Home
 Assistant : réseau et fibre, système, appareils connectés, Wi-Fi, stockage,
 Freebox Home, téléphonie, VPN, player.
@@ -13,10 +17,27 @@ Séparée de l'intégration `freebox` du core, avec laquelle elle peut cohabiter
 
 ## Installation
 
-### HACS
+### Via HACS, en un clic
 
-Ajouter ce dépôt en dépôt personnalisé (catégorie *Intégration*), installer,
+[![Ouvrir ce dépôt dans HACS sur votre instance Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Zaphkiel-Ivanovna&repository=ha-freebox-ultra&category=integration)
+
+Le bouton ouvre ce dépôt dans HACS sur **votre** instance : HACS propose de
+l'ajouter comme dépôt personnalisé, puis il n'y a plus qu'à télécharger et
 redémarrer Home Assistant.
+
+Prérequis : [HACS](https://hacs.xyz) doit être installé, et l'instance doit être
+joignable depuis le navigateur où vous cliquez. Le lien passe par
+`my.home-assistant.io`, qui n'est qu'un redirecteur : aucune donnée de votre
+instance n'y transite.
+
+<details>
+<summary>Si le bouton ne fonctionne pas</summary>
+
+HACS → menu ⋮ → **Dépôts personnalisés** → URL
+`https://github.com/Zaphkiel-Ivanovna/ha-freebox-ultra`, catégorie
+**Intégration** → Ajouter, puis télécharger l'intégration et redémarrer.
+
+</details>
 
 ### Manuelle
 
